@@ -35,8 +35,8 @@ comments: false
 
 <h1 class="subTitle">문의</h1>
 	<ul>
-		<li>email : ben4109@naver.com</li>
-		<li>github : <a href="https://github.com/5un9hun">https://github.com/5un9hun</a></li>
+		<li>Email : ben4109@naver.com</li>
+		<li>Github : <a href="https://github.com/5un9hun">https://github.com/5un9hun</a></li>
 	</ul>
 
 </div>
