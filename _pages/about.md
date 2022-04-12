@@ -44,7 +44,10 @@ comments: false
 <div class="col-md-4">
 
 <div class="sticky-top sticky-top-80" style="text-align: center">
-<p class="mb-5" style="margin-top: 10px"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="30%" height="30%" alt="" /></p>
+<strong>이름 : 오성훈</strong><br>
+<strong>나이 : 22</strong><br>
+<strong>현상황 : 정보보호병 기도중...</strong><br>
+<p class="mb-5" style="margin-top: 10px"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/avatar.jpg" width="70%" height="70%" alt="" /></p>
 </div>
 </div>
 </div>
