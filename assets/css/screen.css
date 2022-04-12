@@ -11,6 +11,10 @@ License: https://www.wowthemes.net/freebies-license/
     padding: 1rem 0rem;
 }
 
+.align-center { display: block; margin-right: auto; margin-left: auto; }
+.align-right { margin-bottom: 1rem; margin-left: 1rem; float: right; }
+.align-left { margin-right: 1rem; margin-bottom: 1rem; float: left; }
+
 a {
     color: #00ab6b;
     transition: all 0.2s;

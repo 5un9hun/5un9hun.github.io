@@ -1,35 +1,50 @@
 ---
 layout: page
-title: Mediumish Template for Jekyll
+title: Introduce me
 permalink: /about
-comments: true
+comments: false
 ---
+
 
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<p>This website is built with Jekyll and Mediumish template for Jekyll. It's for demonstration purposes, no real content can be found. Mediumish template for Jekyll is compatible with Github pages, in fact even this demo is created with Github Pages and hosted with Github.</p>
+<h1 class="subTitle">수상 및 경력</h1>
+	<ul>
+		<h4>2020</h4>
+		<li>경기대학교 컴퓨터공학과 2학년 수료 (휴학중)<br></li>
+		<li>경기대학교 보안동아리 K.knock 11기 정회원<br></li>
+		<li>2020 KCTF - 1위<br></li>
+		<h4>2021</h4>
+		<li>2021 KCTF - 문제 출제자<br></li>
+		<li>[BoB 프로젝트] Lua 인터프리터 취약점 탐색<br></li>
+		<li>대한전자공학회 "Lua 인터프리터 퍼저 구현-JavaScript 인터프리터 퍼징 기법의 적용" 논문 게재</li>
+		<h4>2022</h4>
+		<li>[BoB 그랑프리 프로젝트] 한글 문서 악성 행위 탐지 스크립트 개발<br></li>
+		<li>BoB 10기 취약점 분석트랙 수료<br></li>
+		<li>정보보호병(예정)<br></li>
+	</ul>
 
-<p class="mb-5"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/mediumish-jekyll-template.png" alt="jekyll template mediumish" /></p>
-<h4>Documentation</h4>
+<h1 class="subTitle">자격증</h1>
+	<ul>
+		<h4>2022</h4>
+		<li>리눅스 마스터 2급<br></li>
+		<li>정보처리기능사 (예정)<br></li>			
+	</ul>
 
-<p>Please, read the docs <a href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/">here</a>.</p>
 
-<h4>Questions or bug reports?</h4>
-
-<p>Head over to our <a href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Github repository</a>!</p>
+<h1 class="subTitle">문의</h1>
+	<ul>
+		<li>email : ben4109@naver.com</li>
+		<li>github : <a href="https://github.com/5un9hun">https://github.com/5un9hun</a></li>
+	</ul>
 
 </div>
 
 <div class="col-md-4">
 
-<div class="sticky-top sticky-top-80">
-<h5>Buy me a coffee</h5>
-
-<p>Thank you for your support! Your donation helps me to maintain and improve <a target="_blank" href="https://github.com/wowthemesnet/mediumish-theme-jekyll">Mediumish <i class="fab fa-github"></i></a>.</p>
-
-<a target="_blank" href="https://www.wowthemes.net/donate/" class="btn btn-danger">Buy me a coffee</a> <a target="_blank" href="https://bootstrapstarter.com/bootstrap-templates/template-mediumish-bootstrap-jekyll/" class="btn btn-warning">Documentation</a>
-
+<div class="sticky-top sticky-top-80" style="text-align: center">
+<p class="mb-5" style="margin-top: 10px"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="30%" height="30%" alt="" /></p>
 </div>
 </div>
 </div>
