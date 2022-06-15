@@ -47,7 +47,7 @@ comments: false
 <strong>이름 : 오성훈</strong><br>
 <strong>나이 : 22</strong><br>
 <strong>현상황 : 정보보호병 7월 18일 입대</strong><br>
-<p class="mb-5" style="margin-top: 10px"><img style="border-radius: 20%;" class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="70%" height="70%" alt="" /></p>
+<p class="mb-5" style="margin-top: 10px"><img style="border-radius: 10%;" class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="70%" height="70%" alt="" /></p>
 </div>
 </div>
 </div>
