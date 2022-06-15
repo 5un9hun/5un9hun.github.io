@@ -9,7 +9,7 @@ comments: false
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<h1 class="subTitle">Award and </h1>
+<h1 class="subTitle">Experience and Award</h1>
 	<ul>
 		<h4>2020</h4>
 		<li>경기대학교 컴퓨터공학과 2학년 수료 (휴학중)<br></li>
