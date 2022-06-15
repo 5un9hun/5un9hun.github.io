@@ -9,7 +9,7 @@ comments: false
 <div class="row justify-content-between">
 <div class="col-md-8 pr-5">
 
-<h1 class="subTitle">수상 및 경력</h1>
+<h1 class="subTitle">Award and </h1>
 	<ul>
 		<h4>2020</h4>
 		<li>경기대학교 컴퓨터공학과 2학년 수료 (휴학중)<br></li>
@@ -25,7 +25,7 @@ comments: false
 		<!--<li>정보보호병(예정)<br></li>-->
 	</ul>
 
-<h1 class="subTitle">자격증</h1>
+<h1 class="subTitle">Certificate</h1>
 	<ul>
 		<h4>2022</h4>
 		<li>리눅스 마스터 2급<br></li>
@@ -33,7 +33,7 @@ comments: false
 	</ul>
 
 
-<h1 class="subTitle">문의</h1>
+<h1 class="subTitle">Contact Us</h1>
 	<ul>
 		<li>Email : ben4109@naver.com</li>
 		<li>Github : <a href="https://github.com/5un9hun">https://github.com/5un9hun</a></li>
@@ -46,7 +46,7 @@ comments: false
 <div class="sticky-top sticky-top-80" style="text-align: center">
 <strong>이름 : 오성훈</strong><br>
 <strong>나이 : 22</strong><br>
-<strong>현상황 : 정보보호병 기도중...</strong><br>
+<strong>현상황 : 정보보호병 7월 18일 입대</strong><br>
 <p class="mb-5" style="margin-top: 10px"><img class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="70%" height="70%" alt="" /></p>
 </div>
 </div>
