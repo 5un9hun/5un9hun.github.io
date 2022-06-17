@@ -12,18 +12,9 @@ hidden: false
 HackTheBox Web 문제를 살짝 맛봤는데 문제 난이도가 눈물이 났다. 이정도의 문제를 혼자 풀 실력을 가지면 실력 향상에 도움이 많이 될 것 같아서 HackTheBox Web을 정복해보고자 한다.
 
 
-* [1. Templated - easy (20pts)](#1-Templated-easy-20pts)
-  + [문제 디스크립션](#문제-디스크립션)
-  + [풀이 과정](#풀이-과정)
-  + [플래그 획득](#플래그-획득)
-* [2. Phonebook - easy (30pts)](#2-Phonebook-easy-30pts)
-  + [문제 디스크립션](#문제-디스크립션)
-  + [풀이 과정](#풀이-과정)
-  + [플래그 획득](#플래그-획득)
-* [3. Weather App - easy (30pts)](#3-Weather-App-easy-30pts)
-  + [문제 디스크립션](#문제-디스크립션)
-  + [풀이 과정](#풀이-과정)
-  + [플래그 획득](#플래그-획득)
+* [1. Templated - easy (20pts)](#1--Templated--easy--20pts-)
+* [2. Phonebook - easy (30pts)](#2--Phonebook--easy--30pts-)
+* [3. Weather App - easy (30pts)](#3--Weather--App--easy--30pts-)
 
 
 # Web
