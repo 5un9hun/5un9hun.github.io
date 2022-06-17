@@ -419,7 +419,7 @@ if (req.socket.remoteAddress.replace(/^.*:/, '') != '127.0.0.1') {
 }
 ```
 
-SSRF 생각이 나긴 했는데… 흠..
+SSRF 생각이 나긴 한데… 흠..
 
 ### 플래그 획득
 
