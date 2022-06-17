@@ -387,6 +387,7 @@ class Database {
 module.exports = Database;
 ```
 </div></details>
+<br>
 
 홈페이지 기능은 register, login 기능이 존재하며 SQL을 통해 서버에서 관리되고 있다. 따라서 그리고 index.js 파일을 보면 admin으로 로그인했을 때, flag를 출력시켜준다. 
 
