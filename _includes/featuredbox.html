@@ -47,17 +47,8 @@
                                 <span class="post-date">{{ post.date | date_to_string }}</span>
                                 </span>
                                 <ul class="tags mb-4" style="margin-top:30px; margin-right: 10px; margin-left: 10px;">
-                                {% assign categories_list = site.categories %}
-                                {% if categories_list.first[0] == null %}
-                                    {% for category in categories_list %}
-                                        <li><a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">{{ category | camelcase }}</a></li>
-                                    {% endfor %}
-                                {% else %}
-                                    {% for category in categories_list %}
-                                        <li><a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category[0] | url_escape | strip | replace: ' ', '-' }}">{{ category[0] | camelcase }}</a></li>
-                                    {% endfor %}
-                                {% endif %}
-                                {% assign categories_list = nil %}
+                                {% assign category = post.categories %}
+                    <li><a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">{{ category | camelcase }}</a></li>
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
