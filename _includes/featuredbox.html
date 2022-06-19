@@ -47,8 +47,9 @@
                                 <span class="post-date">{{ post.date | date_to_string }}</span>
                                 </span>
                                 <ul class="tags mb-4" style="margin-top:30px; margin-right: 10px; margin-left: 10px;">
-                                {% assign category = post.categories %}
-                    <li><a class="smoothscroll" href="{{site.baseurl}}/categories#{{ category | url_escape | strip | replace: ' ', '-' }}">{{ category | camelcase }}</a></li>
+                                {% assign post_category = post.categories %}
+                    <li><a class="smoothscroll" href="{{site.baseurl}}/categories#{{ post_category | url_escape | strip | replace: ' ', '-' }}">{{ post_category | camelcase }}</a></li>
+                                {% assign post_category = nil %}
                                 </ul>
                                 <div class="clearfix"></div>
                             </div>
