@@ -12,10 +12,10 @@ hidden: false
 pwn 분야는 내 주 분야이기도 해서 한 번 다 풀어볼 예정이다.
 
 - [1. racecar - very easy (10pts)](#1-racecar---very-easy-10pts))
-- [2. Space pirate: Retribution - very easy (10pts)](#2-Space-pirate-Retribution---very-easy-10pts)
-- [3. You know 0xDiablos - easy (20pts)](#3-You-know-0xDiablos---easy-20pts)
-- [4. Sick ROP - easy (30pts)](#4-Sick-ROP---easy-30pts)
-- [5. Hunting - easy (30pts)](#5-Hunting---easy-30pts)
+- [2. Space pirate: Retribution - very easy (10pts)](#2-space-pirate-retribution---very-easy-10pts)
+- [3. You know 0xDiablos - easy (20pts)](#3-you-know-0xdiablos---easy-20pts)
+- [4. Sick ROP - easy (30pts)](#4-sick-rop---easy-30pts)
+- [5. Hunting - easy (30pts)](#5-hunting---easy-30pts)
 
 
 ## 1. racecar - very easy (10pts)
