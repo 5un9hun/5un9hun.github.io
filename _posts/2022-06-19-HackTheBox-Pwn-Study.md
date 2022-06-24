@@ -16,6 +16,10 @@ pwn 분야는 내 주 분야이기도 해서 한 번 다 풀어볼 예정이다.
 - [3. You know 0xDiablos - easy (20pts)](#3-you-know-0xdiablos---easy-20pts)
 - [4. Sick ROP - easy (30pts)](#4-sick-rop---easy-30pts)
 - [5. Hunting - easy (30pts)](#5-hunting---easy-30pts)
+- [6. Restaurant - easy (20pts)](#6-restaurant---easy-20pts)
+- [7. Bad grades - easy (30pts)](#7-bad-grades---easy-30pts)
+- [8. Fleet Management - easy (20pts)](#8-fleet-management---easy-20pts)
+- [9. Kernel Adventures: Part 1 - medium (50pts)](#9-kernel-adventures-part-1---medium-50pts)
 
 
 ## 1. racecar - very easy (10pts)
@@ -712,7 +716,7 @@ r.close()
 ![Untitled](/assets/images/htb/pwn/Untitled%2029.png)
 
 
-## 6. **Restaurant - easy (20pts)**
+## 6. Restaurant - easy (20pts)
 
 ### 문제 디스크립션
 
@@ -817,7 +821,7 @@ hunting 문제랑 난이도가 너무 극과극 아닌가..
 
 ![Untitled](/assets/images/htb/pwn/Untitled%2032.png)
 
-## 7. **Bad grades - easy (30pts)**
+## 7. Bad grades - easy (30pts)
 
 ### 문제 디스크립션
 
@@ -963,7 +967,7 @@ r.interactive()
 
 ![Untitled](/assets/images/htb/pwn/Untitled%2038.png)
 
-## 8. **Fleet Management - easy (20pts)**
+## 8. Fleet Management - easy (20pts)
 
 ### 문제 디스크립션
 
@@ -1066,7 +1070,7 @@ r.interactive()
 
 ![Untitled](/assets/images/htb/pwn/Untitled%2043.png)
 
-## 9. **Kernel Adventures: Part 1 - medium (50pts)**
+## 9. Kernel Adventures: Part 1 - medium (50pts)
 
 ### 문제 디스크립션
 
