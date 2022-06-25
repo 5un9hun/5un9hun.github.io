@@ -4,7 +4,7 @@ title:  "Linux Kernel Study"
 author: 5un9hun
 categories: [ Study ]
 tags: [ Linux, Kernel, QEMU ]
-image: assets/images/htb/web/title.png
+image: assets/images/study/linux_kernel_study/Untitled.png
 description: "linux kernel study"
 hidden: false
 ---
