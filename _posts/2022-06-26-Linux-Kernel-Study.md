@@ -288,7 +288,7 @@ ROP를 수행하는 과정은 기존의 일반 리눅스 바이너리와 같다.
 
 다음은 드림핵의 Bof 취약점이 발생하는 커널 모듈에서의 ROP 익스플로잇의 실습이다.
 
-시스템에서 write 가 발생했을 때 bof_write 함수가 호출된다.
+시스템에서 write가 발생했을 때 bof_write 함수가 호출된다.
 
 ```c
 static ssize_t bof_write(struct file *file, const char __user *buf,
