@@ -159,12 +159,11 @@ NULL은 0과 같고, 이는 root의 권한과 같다. (root = 0)
 
 위와 같은 권한 상승 페이로드를 설명하기에 앞서 task_struct 를 먼저 알아야 한다. 
 
-task_struct 구조체는 커널 메모리 내에 존재하며, 프로세스의 메모리 맵, 파일 디스크립터, 프로세스의 권한 등의 정보를 저장한다. 이 구조체 내에 주요 필드는 다음과 같다.
+task_struct 구조체는 커널 메모리 내에 존재하며, 프로세스의 메모리 맵, 파일 디스크립터, 프로세스의 권한 등의 정보를 저장한다. 이 구조체 내에 주요 필드는 다음과 같다.
 
 dreamhack 강의에서 보기좋게 정리되어있다.
 
 | state | 현재 태스크의 실행 상태입니다. 0은 실행 중이거나 실행(스케줄) 가능한 상태를 나타내며, 양수 값은 태스크가 정지되었거나 대기 중임을 나타냅니다. |
-| --- | --- |
 | tasks | 커널에 존재하는 태스크의 연결 리스트 노드입니다. |
 | mm | mm_struct는 사용자 메모리 영역(주소공간)에 관한 정보를 가지고 있는 구조체입니다. 일반적으로 같은 프로세스 내의 스레드는 모두 mm이 같습니다. |
 | cred | 현재 태스크의 신원 정보를 가리키는 포인터입니다. |
@@ -175,10 +174,9 @@ dreamhack 강의에서 보기좋게 정리되어있다.
 
 cred 구조체의 멤버는 다음과 같다.
 
-| usage | cred 참조 카운터입니다. 하나의 cred 구조체는 여러 개의 프로세스에서 동시에 사용될 수 있습니다. |
-| --- | --- |
-| uid | 프로세스를 소유하고 있는 사용자 ID(User ID, UID)를 저장합니다. 0으로 덮어쓰면 해당 태스크는 seteuid(0)로 최고관리자 권한을 획득할 수 있습니다. |
-| euid | 실효적인 사용자 ID(Effective User ID, EUID)를 저장합니다. 권한 검사에 실제 사용되는 값을 저장하며, 0으로 덮어쓰면 해당 태스크는 최고관리자 권한을 획득하게 됩니다. 일반적으로는 uid와 같은 값을 가집니다. |
+| usage | cred 참조 카운터입니다. 하나의 cred 구조체는 여러 개의 프로세스에서 동시에 사용될 수 있습니다. |
+| uid | 프로세스를 소유하고 있는 사용자 ID(User ID, UID)를 저장합니다. 0으로 덮어쓰면 해당 태스크는 seteuid(0)로 최고관리자 권한을 획득할 수 있습니다. |
+| euid | 실효적인 사용자 ID(Effective User ID, EUID)를 저장합니다. 권한 검사에 실제 사용되는 값을 저장하며, 0으로 덮어쓰면 해당 태스크는 최고관리자 권한을 획득하게 됩니다. 일반적으로는 uid와 같은 값을 가집니다. |
 | gid, egid | 각각 Real GID와 Effective GID를 저장합니다. GID는 group ID의 약자로 사용자 그룹의 식별번호를 의미합니다. |
 
 gdb를 통해서 현재 쉘의 pid가 담긴 task_struct.cred→euid 또는 uid 를 0으로 셋팅하면 euid 가 root로 세팅되어서 권한이 상승된 것을 확인할 수 있다.
@@ -186,16 +184,15 @@ gdb를 통해서 현재 쉘의 pid가 담긴 task_struct.cred→euid 또는 uid 
 다음은 [vmlinux-gdb.py](http://vmlinux-gdb.py/) 의 명령어로 task_struct 구조체에 쉽게 접근할 수 있게 해준다.
 
 | $lx_current() | 선택된 CPU 코어의 현재 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
-| --- | --- |
 | $lx_task_by_pid(<PID>) | 프로세스 식별자(PID)가 <PID> 인 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
 
 이제 위의 권한 상승 코드를 설명하자면 다음과 같다. 
 
 이러한 형식의 익스플로잇 코드는 일반적으로 cred 구조체를 직접 조작하는 것보다 안정적이다.
 
-커널에서 사용하는 함수인 prepare_kernel_cred() 과 ****commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
+커널에서 사용하는 함수인 prepare_kernel_cred() 과 ****commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
 
-prepare_kernel_cred 함수는 원하는 신원 정보의 cred 구조체를 생성하는 함수이다.
+prepare_kernel_cred 함수는 원하는 신원 정보의 cred 구조체를 생성하는 함수이다.
 
 ```c
 struct cred *prepare_kernel_cred(struct task_struct *daemo)
@@ -251,7 +248,7 @@ int commit_creds(struct cred *new) {
 commit_creds(prepare_kernel_cred(NULL));
 ```
 
-prepare_kernel_cred 의 인자로 NULL(0)을 전달하여 root의 cred를 반환시키고, 이를 다시 commit_creds 의 인자로 전달하면 현재 task의 권한을 root로 상승시킬 수 있다.
+prepare_kernel_cred 의 인자로 NULL(0)을 전달하여 root의 cred를 반환시키고, 이를 다시 commit_creds 의 인자로 전달하면 현재 task의 권한을 root로 상승시킬 수 있다.
 
 ### 익스플로잇 기법 : ROP
 
