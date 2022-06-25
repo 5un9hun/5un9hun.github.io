@@ -187,12 +187,10 @@ gdb를 통해서 현재 쉘의 pid가 담긴 task_struct.cred→euid 또는 uid 
 
 다음은 [vmlinux-gdb.py](http://vmlinux-gdb.py/) 의 명령어로 task_struct 구조체에 쉽게 접근할 수 있게 해준다.
 
-{% raw %}
 | command | description |
 | --- | --- |
 | $lx_current() | 선택된 CPU 코어의 현재 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
-| $lx_task_by_pid(<PID>) | 프로세스 식별자(PID)가 <PID> 인 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
-{% endraw %}
+| $lx_task_by_pid(\<PID\>) | 프로세스 식별자(PID)가 \<PID\> 인 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
 
 이제 위의 권한 상승 코드를 설명하자면 다음과 같다. 
 
