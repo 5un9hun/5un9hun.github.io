@@ -3,12 +3,12 @@ layout: post
 title:  "Linux Kernel Study"
 author: 5un9hun
 categories: [ Study ]
-tags: [ Linux, Kernel, QEMU ]
+tags: [ Linux ]
 image: assets/images/study/linux_kernel_study/title.png
 description: "linux kernel study"
 hidden: false
 ---
-1234
+
 HackTheBox Pwnable 문제를 풀다가 시도해 본 적도 없는 커널 문제에 맞닥뜨렸다. 따라서 이번 기회에 리눅스 커널에 대해서 공부해보기로 했다.
 
 
