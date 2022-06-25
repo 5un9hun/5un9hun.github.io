@@ -4,7 +4,7 @@ title:  "Linux Kernel Study"
 author: 5un9hun
 categories: [ Study ]
 tags: [ Linux, Kernel, QEMU ]
-image: assets/images/study/linux_kernel_study/Untitled.png
+image: assets/images/study/linux_kernel_study/title.png
 description: "linux kernel study"
 hidden: false
 ---
@@ -397,5 +397,9 @@ os.execlp("bash", "-bash")
 이 스크립트를 실행하면 LPE 공격에 성공한 것을 알 수 있다.
 
 ![Untitled](/assets/images/study/linux_kernel_study/Untitled%202.png)
+
+- - -
+<br>
+. . .
 
 처음에 커널은 재미없을 것이라 생각했는데 막상 시작해보니 생각보다 재밌다. 더 공부해볼 예정이다.
