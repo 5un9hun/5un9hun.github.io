@@ -11,9 +11,20 @@ License: https://www.wowthemes.net/freebies-license/
     padding: 1rem 0rem;
 }
 
+/*5un9hun-css start*/
 .align-center { display: block; margin-right: auto; margin-left: auto; }
 .align-right { margin-bottom: 1rem; margin-left: 1rem; float: right; }
 .align-left { margin-right: 1rem; margin-bottom: 1rem; float: left; }
+
+.mbtablestyle {
+    border-collapse: collapse;
+}
+
+.mbtablestyle > table {
+    border: 1px solid black;
+    padding: 20px;
+}
+/*5un9hun-css end*/
 
 a {
     color: #00ab6b;
