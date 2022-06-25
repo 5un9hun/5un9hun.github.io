@@ -18,11 +18,13 @@ License: https://www.wowthemes.net/freebies-license/
 
 .mbtablestyle {
     border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-.mbtablestyle > table {
+.mbtablestyle th, .mbtablestyle td {
     border: 1px solid black;
-    padding: 20px;
+    padding: 15px;
+    text-align: center;
 }
 /*5un9hun-css end*/
 
