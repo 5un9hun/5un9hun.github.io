@@ -190,7 +190,7 @@ gdb를 통해서 현재 쉘의 pid가 담긴 task_struct.cred→euid 또는 uid 
 
 이러한 형식의 익스플로잇 코드는 일반적으로 cred 구조체를 직접 조작하는 것보다 안정적이다.
 
-커널에서 사용하는 함수인 prepare_kernel_cred() 과 ****commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
+커널에서 사용하는 함수인 prepare_kernel_cred() 과 commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
 
 prepare_kernel_cred 함수는 원하는 신원 정보의 cred 구조체를 생성하는 함수이다.
 
