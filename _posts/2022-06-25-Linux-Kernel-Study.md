@@ -194,15 +194,17 @@ gdb를 통해서 현재 쉘의 pid가 담긴 task_struct.cred→euid 또는 uid 
 | $lx_task_by_pid(\<PID\>) | 프로세스 식별자(PID)가 \<PID\> 인 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
 {:.mbtablestyle}
 
-이제 위의 권한 상승 코드를 설명하자면 다음과 같다.
-
-이러한 형식의 익스플로잇 코드는 일반적으로 cred 구조체를 직접 조작하는 것보다 안정적이다.
+이제 처음에 언급한 권한 상승 코드를 살펴볼 것이다.
 
 ```c
 commit_creds(prepare_kernel_cred(NULL))
 ```
 
 커널에서 사용하는 함수인 prepare_kernel_cred() 와 commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
+
+이러한 형식의 익스플로잇 코드는 일반적으로 cred 구조체를 직접 조작하는 것보다 안정적이다.
+
+다음 두 개의 함수들을 한 번 알아보자.
 
 prepare_kernel_cred 함수는 원하는 신원 정보의 cred 구조체를 생성하는 함수이다.
 
