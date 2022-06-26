@@ -402,8 +402,77 @@ os.execlp("bash", "-bash")
 
 ![Untitled](/assets/images/analysis/linux_kernel/Untitled%202.png)
 
-- - -
-<br>
-. . .
+## 보호 기법
 
-처음에 커널은 재미없을 것이라 생각했는데 막상 시작해보니 생각보다 재밌다. 더 공부해볼 예정이다.
+### 보호 기법 : KASLR
+
+KASLR 기법은 커널 메모리 주소의 예측을 어렵기하기 위해서 나온 보호 기법이다. qemu 실행시 nokaslr 옵션을 추가해서 비활성화할 수 있다.
+
+ALSR 기법을 적용한 바이너리는 code, data, heap 영역 등의 베이스 주소가 실행 중에 변경되지 않는다는 한계가 있는 것처럼, KASLR 기법이 적용된 커널도 재부팅하기 전까지는 베이스 주소가 변하지 않는다. 따라서 패널 커닉 등의 예외 상황이 발생하지 않는 한 무차별 공격(Brute Force) 등의 공격으로 커널의 베이스 주소를 구할 수 있다.
+
+또한, 리눅스 KASLR 기법은 ASLR 기법에 비해 무차별 공격에 더욱 취약하다. ASLR 기법은 16비트 이상의 엔트로피를 가지는 반면, KASLR 기법은 32비트에서는 최대 8비트, 64비트에서는 최대 9비트의 엔트로피를 가지고 있다. (엔트로피 = 주소를 구성하는 전체 비트 중 변경될 수 있는 비트의 수)
+
+이는 32bit에서는 2^8 = 256 이고, 64bit에서는 2^9 = 512 만큼의 주소 공간이 생길 수 있다.
+
+엔트로피가 N, 시도 횟수가 α일 때, 추측에 성공할 확률이다.
+
+![Untitled](/assets/images/analysis/linux_kernel/Untitled%203.png)
+
+엔트로피가 8비트의 경우, 178번을 시도하고, 9비트일 경우, 355번을 시도하면 50%확률로 추측에 성공할 수 있다. (최근에는 이를 개선하기 위해 커널 코드를 함수 단위로 재배치하는 패치가 개발되고 있다.)
+
+**ASLR 기법과 KASLR 기법 차이점**
+
+|  | ASLR (사용자 영역) | KASLR (커널 영역) |
+| --- | --- | --- |
+| 목적 | 바이너리 섹션들의 주소 랜덤화 | 커널 코드 및 데이터의 주소 랜덤화 |
+| 적용 시점 | 바이너리 실행시 | 커널 부팅 시 |
+| 재배치 주소 공간 | 사용자 주소 공간 | 커널 주소 공간 |
+| 한계 | 바이너리가 실행되는 동안은 주소가 고정됨 | 재부팅 전에는 주소가 고정됨엔트로피가 작음 |
+| 비고 | 바이너리의 코드 섹션은 바이너리에 PIE가 적용되어 있어야 랜덤화가 가능합니다. |  |
+{:.mbtablestyle}
+
+커널의 기본 주소
+
+```bash
+sudo grep _stext /boot/System.map-`uname -r`
+```
+
+커널의 실제 주소
+
+```bash
+sudo grep _stext /proc/kallsyms
+```
+
+nokaslr 를 없애고 부팅을 시키면 커널의 실제 주소가 달라진 것을 확인할 수 있다.
+
+![Untitled](/assets/images/analysis/linux_kernel/Untitled%204.png)
+
+### Bypass : Kernel Leak
+
+1. 커널 주소 노출
+    1. 직접적인 leak
+        - 2.6.29 이하 버전의 커널에서는 /proc/[PID]/stat 또는 /proc/[PID]/wchan 가상 파일을 통해 커널 주소를 손쉽게 획득할 수 있다.
+    2. dmesg 출력 (커널 로그 출력)
+        - 커널 코드에서 printk 라는 함수를 이용하면 커널 로그에 메세지를 남길 수 있다. 따라서 커널 모듈에서 디버깅 등으로 커널 포인터 값을 출력한다면 커널 로그에 접근할 권한이 있는 사용자는 커널 주소를 얻을 수 있다.
+        - 리눅스 커널 개발진들은 이를 방지하고자 %p 형식으로 출력될 때, 주소에 해시 연산을 적용해서 출력시킨다.
+            - ex) 0xfffffff8108157b→ 0x0000000070d2fc92
+        - 만약 커널 코드가 printk를 통해 커널 주소가 leak된다면 일반 사용자는 dmesg (/dev/kmsg) 커널 로그를 접근할 수 없지만 충분한 권한이 있는 사용자는 이를 읽어들여 kaslr을 무력화할 수 있다.
+2. 초기화되지 않은 메모리
+    - memset 누락 등의 이유로 메모리가 초기화되지 않고 출력되면 공격자를 이를 바탕으로 프로그램의 주소를 획득할 수 있다.
+    - 특히, 커널 데이터를 사용자 공간으로 복사하는 put_user 함수, copy_to_user 함수 등을 사용할 때 전달할 버퍼를 제대로 초기화해야한다.
+    - 구조체 패딩에 의한 leak도 가능하다. 컴파일러에서 패딩을 추가할 때, 중간에 삽입한 패딩은 초기화가 안될 수도 있다. (Structleak 플러그인을 통해 방지 가능)
+3. OOB read (Out Of Bound read)
+    - 사용자 입력을 검증하지 않고 배열 인덱스나 size값으로 사용하면 OOB 접근이 가능하다. OOB가 발생하는 버퍼의 뒤에 커널 주소가 존재한다면 공격자는 OOB read 공격을 통해 커널 주소를 leak할 수 있다.
+    - stack - heap - global 영역에서 발생할 수 있다.
+
+**Conference**
+
+[Introduction: Linux Kernel Exploit🐧 | Dreamhack](https://learn.dreamhack.io/36)
+
+[Background: Kernel Debugging | Dreamhack](https://learn.dreamhack.io/51)
+
+[Exploit Tech: prepare & commit | Dreamhack](https://learn.dreamhack.io/61)
+
+[Mitigation: KASLR | Dreamhack](https://learn.dreamhack.io/65)
+
+[Exploit Tech: Kernel Leak | Dreamhack](https://learn.dreamhack.io/68)
