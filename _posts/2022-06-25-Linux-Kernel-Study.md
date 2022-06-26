@@ -204,8 +204,6 @@ commit_creds(prepare_kernel_cred(NULL))
 
 이러한 형식의 익스플로잇 코드는 일반적으로 cred 구조체를 직접 조작하는 것보다 안정적이다.
 
-<br>
-
 prepare_kernel_cred 함수는 원하는 신원 정보의 cred 구조체를 생성하는 함수이다.
 
 ```c
