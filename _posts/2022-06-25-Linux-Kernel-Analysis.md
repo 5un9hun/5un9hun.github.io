@@ -17,6 +17,8 @@ HackTheBox Pwnable 문제를 풀다가 시도해 본 적도 없는 커널 문제
 	* [익스플로잇 기법 : ROP](#익스플로잇-기법--rop)
 - [보호 기법](#보호-기법)
 	* [보호 기법 : KASLR](#보호-기법--kaslr)
+	* [Bypass : Kernel Leak](#bypass--kernel-leak)
+
 
 
 ## 셋팅 및 부팅
