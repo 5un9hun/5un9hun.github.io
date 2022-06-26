@@ -194,11 +194,15 @@ gdb를 통해서 현재 쉘의 pid가 담긴 task_struct.cred→euid 또는 uid 
 | $lx_task_by_pid(\<PID\>) | 프로세스 식별자(PID)가 \<PID\> 인 프로세스 또는 스레드의 태스크 구조체를 반환합니다. |
 {:.mbtablestyle}
 
-이제 위의 권한 상승 코드를 설명하자면 다음과 같다. 
+이제 위의 권한 상승 코드를 설명하자면 다음과 같다.
 
 이러한 형식의 익스플로잇 코드는 일반적으로 cred 구조체를 직접 조작하는 것보다 안정적이다.
 
-커널에서 사용하는 함수인 prepare_kernel_cred() 과 commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
+```c
+commit_creds(prepare_kernel_cred(NULL))
+```
+
+커널에서 사용하는 함수인 prepare_kernel_cred() 와 commit_creds() 를 이용하여 root 권한을 획득할 수 있다.
 
 prepare_kernel_cred 함수는 원하는 신원 정보의 cred 구조체를 생성하는 함수이다.
 
@@ -260,9 +264,9 @@ prepare_kernel_cred 의 인자로 NULL(0)을 전달하여 root의 cred를 반환
 
 ### 익스플로잇 기법 : ROP
 
-커널 익스플로잇에도 ROP 기법을 적용할 수 있다. 일반적인 Buffer Overflow 취약점이 발생했다고 가정한다. ret 의 위치의 값을 조작할 수 있을 때, ROP 기법을 적용할 수 있다.
+커널 익스플로잇에도 ROP 기법을 적용할 수 있다. 일반적인 Buffer Overflow 취약점이 발생했다고 가정한다. ret의 위치의 값을 조작할 수 있을 때, ROP 기법을 적용할 수 있다.
 
-ROP 기법을 위해서는 가젯을 찾아야한다. 가젯같은경우 System.map 파일 또는 vmlinux 를 통해 얻을 수 있다. 
+ROP 기법을 위해서는 가젯을 찾아야한다. 가젯같은경우 System.map 파일 또는 vmlinux 파일을 통해 얻을 수 있다. 
 
 ```bash
 readelf -s vmlinux | grep -w -e prepare_kernel_cred -e commit_creds
@@ -272,7 +276,7 @@ readelf -s vmlinux | grep -w -e prepare_kernel_cred -e commit_creds
 
 ![Untitled](/assets/images/study/linux_kernel_study/Untitled%201.png)
 
-단, 이러한 가젯의 경우 kaslr 이 적용되지 부팅이 되어야 가젯을 사용할 수 있다.
+단, 이러한 가젯의 경우 kaslr 기법이 적용되지 않은 상태에서 부팅이 되어야 가젯을 이용할 수 있다.
 
 다음과 같이 qemu 부팅 시 kaslr 을 설정할 수 있다.
 
