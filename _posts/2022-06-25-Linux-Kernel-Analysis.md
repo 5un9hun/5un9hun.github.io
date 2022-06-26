@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Linux Kernel Study"
+title:  "Linux Kernel Analysis"
 author: 5un9hun
 categories: [ Study ]
 tags: [ Linux, Kernel, QEMU ]
-image: assets/images/study/linux_kernel_study/title.png
-description: "linux kernel study"
+image: assets/images/analysis/linux_kernel/title.png
+description: "linux kernel analysis"
 hidden: false
 ---
 
@@ -272,9 +272,9 @@ ROP 기법을 위해서는 가젯을 찾아야한다. 가젯같은경우 System.
 readelf -s vmlinux | grep -w -e prepare_kernel_cred -e commit_creds
 ```
 
-![Untitled](/assets/images/study/linux_kernel_study/Untitled.png)
+![Untitled](/assets/images/analysis/linux_kernel/Untitled.png)
 
-![Untitled](/assets/images/study/linux_kernel_study/Untitled%201.png)
+![Untitled](/assets/images/analysis/linux_kernel/Untitled%201.png)
 
 단, 이러한 가젯의 경우 kaslr 기법이 적용되지 않은 상태에서 부팅이 되어야 가젯을 이용할 수 있다.
 
@@ -400,7 +400,7 @@ os.execlp("bash", "-bash")
 
 이 스크립트를 실행하면 LPE 공격에 성공한 것을 알 수 있다.
 
-![Untitled](/assets/images/study/linux_kernel_study/Untitled%202.png)
+![Untitled](/assets/images/analysis/linux_kernel/Untitled%202.png)
 
 - - -
 <br>
