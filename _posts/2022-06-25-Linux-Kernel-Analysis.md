@@ -156,6 +156,10 @@ system("/bin/sh")
 
 ```c
 commit_creds(prepare_kernel_cred(NULL))
+
+or
+
+commit_creds(prepare_cred(NULL))
 ```
 
 NULL은 0과 같고, 이는 root의 권한과 같다. (root = 0)
