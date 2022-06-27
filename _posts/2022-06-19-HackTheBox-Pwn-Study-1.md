@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "HackTheBox Pwn Study"
+title:  "HackTheBox Pwn Study - 1"
 author: 5un9hun
 categories: [ HackTheBox ]
 tags: [ HTB, Pwn ]
 image: assets/images/htb/pwn/title.png
-description: "hackthebox pwn study"
+description: "hackthebox pwn study - 1"
 hidden: false
 ---
 
@@ -1082,5 +1082,6 @@ r.interactive()
 ### 풀이 과정
 
 커널 어렵당.. 커널은 처음이라 커널 공부중...
+이 문제는 상당히 커널 공부를 해봐야할 듯..ㅠㅠ
 
 ### 플래그 획득

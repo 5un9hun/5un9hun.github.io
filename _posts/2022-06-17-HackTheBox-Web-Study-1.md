@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "HackTheBox Web Study"
+title:  "HackTheBox Web Study - 1"
 author: 5un9hun
 categories: [ HackTheBox ]
 tags: [ HTB, Web ]
 image: assets/images/htb/web/title.png
-description: "hackthebox web study"
+description: "hackthebox web study - 1"
 hidden: false
 ---
 
