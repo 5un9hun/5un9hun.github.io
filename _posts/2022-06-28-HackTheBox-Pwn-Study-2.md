@@ -374,7 +374,6 @@ workdir 를 왜 / 로 해놨지..
 ## 4. Toxin - medium (40pts)
 
 ### 문제 디스크립션
-ㅇㅇㅇㅇdddd
 
 ### 풀이 과정
 
