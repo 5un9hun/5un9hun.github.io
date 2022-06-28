@@ -4,4 +4,4 @@ _site
 .sass-cache
 *~
 .jekyll-cache
-auto_script
+auto_script.bat
