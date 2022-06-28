@@ -2,7 +2,7 @@
 layout: post
 title:  "Linux Kernel Analysis"
 author: 5un9hun
-categories: [ Study ]
+categories: [ Analysis ]
 tags: [ Linux, Kernel, QEMU ]
 image: assets/images/analysis/linux_kernel/title.png
 description: "linux kernel analysis"
