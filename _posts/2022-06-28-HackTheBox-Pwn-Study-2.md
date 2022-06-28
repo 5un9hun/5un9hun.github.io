@@ -12,7 +12,7 @@ hidden: false
 계속해서 문제를 풀고 있다.
 
 - [1. Space - medium (40pts)](#1-space---medium-40pts)
-- [2. What does the f say? - medium (30pts)](#what-does-the-f-say----medium-30pts)
+- [2. What does the f say? - medium (30pts)](#2-what-does-the-f-say---medium-30pts)
 - [3. Antidote - medium (30pts)](#3-antidote---medium-30pts)
 - [4. Toxin - medium (40pts)](#4-toxin---medium-40pts)
 
