@@ -33,7 +33,7 @@ comments: false
 	</ul>
 
 
-<h1 class="subTitle">Contact Us</h1>
+<h1 class="subTitle">Contact Me</h1>
 	<ul>
 		<li>Email : ben4109@naver.com</li>
 		<li>Github : <a href="https://github.com/5un9hun">https://github.com/5un9hun</a></li>
@@ -46,7 +46,7 @@ comments: false
 <div class="sticky-top sticky-top-80" style="text-align: center">
 <strong>이름 : 오성훈</strong><br>
 <strong>나이 : 22</strong><br>
-<strong>현상황 : 정보보호병 7월 18일 입대</strong><br>
+<strong>현상황 : 군복무중 2024년 1월 17일 전역!! </strong><br>
 <p class="mb-5" style="margin-top: 10px"><img style="border-radius: 10%;" class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="70%" height="70%" alt="" /></p>
 </div>
 </div>
