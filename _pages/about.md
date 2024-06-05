@@ -47,7 +47,6 @@ comments: false
 <strong>이름 : 오성훈</strong><br>
 <strong>나이 : 22</strong><br>
 <strong>현상황 : 군복무중 2024년 1월 17일 전역!! </strong><br>
-<p class="mb-5" style="margin-top: 10px"><img style="border-radius: 10%;" class="shadow-lg" src="{{site.baseurl}}/assets/images/me.jpg" width="70%" height="70%" alt="" /></p>
 </div>
 </div>
 </div>
